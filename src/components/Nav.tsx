@@ -47,7 +47,7 @@ export default function Nav({ active }: { active: string }) {
             onClick={() => go("home")}
             onMouseEnter={() => setVariant("nav")}
             onMouseLeave={resetVariant}
-            className="font-display text-lg tracking-[0.15em] text-ivory sm:text-xl"
+            className="hidden font-display text-lg tracking-[0.15em] text-ivory sm:text-xl lg:block"
             aria-label="Luminary Hub, go to home"
           >
             LUMINARY <span className="text-[#c9a157]">HUB</span>
