@@ -112,17 +112,17 @@ export default function AtmosphereBackground({ theme }: { theme: AtmosphereTheme
       <div
         ref={blobRefs[0]}
         className="atmos-blob"
-        style={{ width: "55vw", height: "55vw", left: "-10%", top: "-15%", background: t.blobs[0] }}
+        style={{ width: "75vmax", height: "75vmax", left: "-20%", top: "-15%", background: t.blobs[0] }}
       />
       <div
         ref={blobRefs[1]}
         className="atmos-blob"
-        style={{ width: "45vw", height: "45vw", right: "-10%", top: "20%", background: t.blobs[1] }}
+        style={{ width: "65vmax", height: "65vmax", right: "-15%", top: "25%", background: t.blobs[1] }}
       />
       <div
         ref={blobRefs[2]}
         className="atmos-blob"
-        style={{ width: "50vw", height: "50vw", left: "20%", bottom: "-20%", background: t.blobs[2] }}
+        style={{ width: "70vmax", height: "70vmax", left: "15%", bottom: "-20%", background: t.blobs[2] }}
       />
       <div
         className="absolute inset-0"

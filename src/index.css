@@ -110,6 +110,12 @@ button {
   transition: background 1.6s ease, opacity 1.2s ease;
 }
 
+@media (max-width: 768px) {
+  .atmos-blob {
+    filter: blur(40px);
+  }
+}
+
 /* ---------- Glass ---------- */
 .glass {
   background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
