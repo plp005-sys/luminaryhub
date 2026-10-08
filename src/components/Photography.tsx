@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useCursor } from "../context/CursorContext";
 
@@ -44,10 +44,32 @@ export default function Photography() {
   const trackRef = useRef<HTMLDivElement>(null);
   const constraintRef = useRef<HTMLDivElement>(null);
   const { setVariant, resetVariant } = useCursor();
+  const [dragLimit, setDragLimit] = useState(-2400);
 
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
   const headingX = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
+
+  useEffect(() => {
+    const updateConstraint = () => {
+      if (trackRef.current) {
+        const scrollW = trackRef.current.scrollWidth;
+        const containerW = constraintRef.current?.offsetWidth || window.innerWidth;
+        const limit = containerW - scrollW - 16;
+        setDragLimit(Math.min(0, limit));
+      }
+    };
+
+    updateConstraint();
+    const timer = setTimeout(updateConstraint, 300);
+    window.addEventListener("resize", updateConstraint);
+    window.addEventListener("orientationchange", updateConstraint);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", updateConstraint);
+      window.removeEventListener("orientationchange", updateConstraint);
+    };
+  }, []);
 
   return (
     <section
@@ -80,9 +102,9 @@ export default function Photography() {
         <motion.div
           ref={trackRef}
           drag="x"
-          dragConstraints={{ left: -1700, right: 0 }}
-          dragElastic={0.08}
-          className="flex gap-5 px-4 pb-4 sm:gap-7 sm:px-8"
+          dragConstraints={{ left: dragLimit, right: 0 }}
+          dragElastic={0.1}
+          className="flex w-max gap-5 px-4 pb-4 touch-pan-y sm:gap-7 sm:px-8"
           onMouseEnter={() => setVariant("drag")}
           onMouseLeave={resetVariant}
         >
@@ -106,7 +128,7 @@ export default function Photography() {
               </figcaption>
             </motion.figure>
           ))}
-          <div className="flex w-[260px] shrink-0 flex-col items-start justify-center gap-4 sm:w-[320px]">
+          <div className="flex w-[260px] shrink-0 flex-col items-start justify-center gap-4 pr-6 sm:w-[320px] sm:pr-8">
             <p className="font-display text-3xl leading-tight text-ivory">
               Photography.
               <br />
