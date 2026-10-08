@@ -120,8 +120,8 @@ export default function App() {
         <Footer />
       </div>
 
-      {/* Logo at top left corner - rendered last to ensure it's always on top */}
-      <div className="fixed top-4 left-4 z-[100] sm:top-6 sm:left-6">
+      {/* Logo at top left corner - hidden in mobile view mode, visible on sm and up */}
+      <div className="hidden sm:block fixed top-4 left-4 z-[100] sm:top-6 sm:left-6">
         <a
           href="#home"
           onClick={(e) => {
